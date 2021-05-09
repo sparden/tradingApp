@@ -8,6 +8,7 @@ class MarketWatchScreen extends StatefulWidget {
 }
 
 class _MarketWatchScreenState extends State<MarketWatchScreen> {
+  final _formKey = GlobalKey<FormState>();
   List stocks = [
     {
       "name": "JPASSOCIAT",
@@ -83,42 +84,152 @@ class _MarketWatchScreenState extends State<MarketWatchScreen> {
         itemBuilder: (context, index) {
           final stock = stocks[index];
 
-          return Expanded(
-            child: Column(
-              children: [
-                ListTile(
-                  tileColor: Colors.green[100],
-                  contentPadding: EdgeInsets.all(10),
-                  title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text("${stock['name']}", style: TextStyle(color: Colors.black,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500)),
-                        Text("${stock['id']}",
-                            style: TextStyle(color: Colors.grey[500], fontSize: 20)),
-                      ]),
-                  trailing: Column(children: <Widget>[
-                    Text("\$${stock['current_price']}", style: TextStyle(color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500)),
-                    Container(
-                      width: 75,
-                      child: Text("${stock['exchange']}", style: TextStyle(color: Colors.white)),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.red
-                      ),
-                    )
-                  ],
-                  ),
-                ),
-                Divider(
-                  thickness: 1,
-                )
-              ],
+          return Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                   Container(
+                     padding: EdgeInsets.only(left: 5.0),
+                     child: Row(
+                       children: [
+                         Column(
+                              children: [
+                                ElevatedButton(
+                                    onPressed: (){
+          showDialog(
+          context: context,
+          builder: (BuildContext context) {
+          return AlertDialog(
+          content: Stack(
+          clipBehavior: Clip.none, children: <Widget>[
+          Positioned(
+          right: -40.0,
+          top: -40.0,
+          child: InkResponse(
+          onTap: () {
+          Navigator.of(context).pop();
+          },
+          child: CircleAvatar(
+          child: Icon(Icons.close),
+          backgroundColor: Colors.red,
+          ),
+          ),
+          ),
+          Form(
+          key: _formKey,
+          child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+          Padding(
+          padding: EdgeInsets.all(8.0),
+          child: TextField(
+             decoration: InputDecoration(
+               labelText: 'Quantity',
+               hintText: 'Quantity',
+             ),
+          ),
+          ),
+          Padding(
+          padding: EdgeInsets.all(8.0),
+          child: TextField(
+            decoration: InputDecoration(
+              labelText: 'Order Type',
+              hintText: 'Order Type',
             ),
+          ),
+          ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Price',
+                  hintText: 'Price',
+                ),
+              ),
+            ),
+          Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+          child: Text('Confirm'),
+          onPressed: () {
+          if (_formKey.currentState.validate()) {
+          _formKey.currentState.save();
+          }
+          
+          },
+          ),
+          )
+          ],
+          ),
+          ),
+          ],
+          ),
+          );
+          },
+          );
+          },
+                                    child: Text('Buy'),
+                                ),
+                               SizedBox(
+                                 height: 5,
+                               ),
+                               ElevatedButton(
+                                    onPressed: (){},
+                                    child: Text('Sell',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                      ),
+                                    )
+                                ),
+                              ],
+                            ),
+                       ],
+                     ),
+                   ),
+                    Container(
+                      child: Row(
+                        children: [
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text("${stock['name']}", style: TextStyle(color: Colors.black,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w500)),
+                                Text("${stock['id']}",
+                                    style: TextStyle(color: Colors.grey[500], fontSize: 20)),
+                              ]),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(right: 5.0),
+                      child: Row(
+                        children: [
+                          Column(children: <Widget>[
+                            Text("\$${stock['current_price']}", style: TextStyle(color: Colors.black,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500)),
+                            Container(
+                              width: 75,
+                              child: Text("${stock['exchange']}", style: TextStyle(color: Colors.white)),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Colors.red
+                              ),
+                            )
+                          ],
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+              Divider(
+                thickness: 3,
+              )
+            ],
           );
         },
       ),
