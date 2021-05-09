@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tradingapp/loginScreen.dart';
 
 import 'homeScreen.dart';
+import 'orderScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: LgnScreen(),
+      home: OrderScreen(),
     );
   }
 }

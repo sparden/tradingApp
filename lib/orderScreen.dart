@@ -10,11 +10,6 @@ class OrderScreen extends StatefulWidget {
 class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Orders'),
-      ),
-      body: Text(''),
-    );
+    return Scaffold();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tradingapp/marketWatchScreen.dart';
 import 'package:tradingapp/profileScreen.dart';
 
 import 'orderScreen.dart';
@@ -17,13 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Trading App'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-          ],
-        ),
-      ),
+      body: MarketWatchScreen(),
       drawer: Drawer(
         child: ListView(
           children: [
