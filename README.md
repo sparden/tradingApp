@@ -2,6 +2,21 @@
 
 A new Flutter project.
 
+<----- Command to build and run app ------>
+
+
+                flutter create tradinapp
+                cd tradinapp
+                flutter analyze
+                flutter test
+                flutter run lib/main.dart
+   ----Build an APK
+   
+                flutter build --split-per-abi
+                or 
+                flutter build appbundle 
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
